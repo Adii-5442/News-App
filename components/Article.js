@@ -2,7 +2,9 @@ import React from "react";
 import { View, StyleSheet , Text , SafeAreaView , Image , Platform , StatusBar, TextInput} from "react-native";
 
 const Article = (props) => {
-    
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// RECENT AGO FUNCTIONALITY /////////////////////////////////////////////////////////
     var main_date =  (props.publishedAt)
     const [year , month , day] = (main_date.substring(0,10)).split('-');
     const[hours,minutes,seconds] = (main_date.substring(11,19)).split(':')
@@ -32,7 +34,10 @@ const Article = (props) => {
     }
 
     console.log("Current Date :=>",currentDate,"(",msCD,")"," ","News Feed Date :=>",modified_md,"(",msMD,")"," ","Published :==>",dateToShow)
-     
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     return(        
         <View style={styles.container}>
             <Image source = {{

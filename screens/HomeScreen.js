@@ -12,9 +12,7 @@ const HomeScreen = (navigation) => {
     const getNews = () => {
         axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=3ff5ce77d87f44d497eebcc5c0249ed1',{
             params:{
-                category: "technology",
-                country: "in",
-                sortBy:"publishedAt"
+                sortBy:"publishedAt",
             }
         })
             .then( (response) =>{

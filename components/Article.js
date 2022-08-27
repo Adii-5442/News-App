@@ -2,24 +2,48 @@ import React from "react";
 import { View, StyleSheet , Text , SafeAreaView , Image , Platform , StatusBar, TextInput} from "react-native";
 
 const Article = (props) => {
-    var main_date = (props.publishedAt).substring(0,10)
-    return(
-        
+    
+    var main_date =  (props.publishedAt)
+    const [year , month , day] = (main_date.substring(0,10)).split('-');
+    const[hours,minutes,seconds] = (main_date.substring(11,19)).split(':')
+    var currentDate = new Date().toLocaleString()
+    var modified_md = new Date(year,month-1,day,hours,minutes,seconds).toLocaleString()
+    let msCD = Date.parse(currentDate);
+    let msMD = Date.parse(modified_md);
+    let difsec = (msCD-msMD)/1000;
+    let difminutes = Math.floor(difsec/60)
+    let difhours = Math.floor(difminutes/60)
+    var dateToShow = "";
+    if(difhours>=24){
+        dateToShow= (Math.floor(difhours/24)).toString()+" Days ago";
+    }
+    else if(difhours>1)
+    {
+        dateToShow = (difhours).toString()+" Hours ago";
+    }
+    else if(difhours==0 && difminutes>0)
+    {
+        dateToShow=(difminutes).toString()+" Minutes ago";
+    }
+    else if(difminutes==0)
+    {
+        dateToShow=(difsec).toString() + " Seconds ago"
 
+    }
 
-
-        
+    console.log("Current Date :=>",currentDate,"(",msCD,")"," ","News Feed Date :=>",modified_md,"(",msMD,")"," ","Published :==>",dateToShow)
+     
+    return(        
         <View style={styles.container}>
             <Image source = {{
                 uri:props.urlToImage
             }}
-
             style={styles.image}
             />
 
             <Text style={styles.title}>{props.title}</Text>
 
-            <Text style={styles.date}>{main_date}</Text>
+            <Text style={styles.date}>{dateToShow}</Text>
         </View>
     )
 
